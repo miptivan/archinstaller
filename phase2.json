@@ -1,0 +1,93 @@
+[
+    {
+    "id": 1,
+    "description": "Set timezone",
+    "command": "ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 2,
+    "description": "Sync hardware clock",
+    "command": "hwclock --systohc",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 3,
+    "description": "Edit locale.gen",
+    "command": "MANUALLY. NOT AUTOMATED! nvim /etc/locale.gen (uncomment en_US.UTF-8 UTF-8)",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 4,
+    "description": "Generate locale",
+    "command": "locale-gen",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 5,
+    "description": "Set LANG and hostname",
+    "command": "echo 'LANG=en_US.UTF-8' > /etc/locale.conf && echo 'arch' > /etc/hostname",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 6,
+    "description": "Set root password",
+    "command": "MANUALLY. NOT AUTOMATED! passwd",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 7,
+    "description": "Create user ivan",
+    "command": "useradd -m -G wheel -s /bin/bash ivan",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 8,
+    "description": "Set password for ivan",
+    "command": "MANUALLY. NOT AUTOMATED! passwd ivan",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 9,
+    "description": "Enable sudo for wheel",
+    "command": "MANUALLY. NOT AUTOMATED! EDITOR=nvim visudo (uncomment %wheel ALL=(ALL:ALL) ALL)",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 10,
+    "description": "Enable NetworkManager",
+    "command": "systemctl enable NetworkManager",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 11,
+    "description": "Install GRUB",
+    "command": "grub-install /dev/sda",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 12,
+    "description": "Generate GRUB config",
+    "command": "grub-mkconfig -o /boot/grub/grub.cfg",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 13,
+    "description": "Exit chroot",
+    "command": "MANUALLY. NOT AUTOMATED! 'exit' then run phase3.json",
+    "status": "pending",
+    "error": ""
+  }
+]

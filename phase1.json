@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "description": "Partition disk using cfdisk",
+    "command": "MANUALLY. NOT AUTOMATED! cfdisk /dev/sda (create EFI/swap/root)",
+    "status": "",
+    "error": ""
+  },
+  {
+    "id": 2,
+    "description": "Format root partition",
+    "command": "mkfs.ext4 /dev/sda3",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 3,
+    "description": "Mount root partition",
+    "command": "mount /dev/sda3 /mnt",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 4,
+    "description": "Create EFI dir",
+    "command": "mkdir -p /mnt/boot/efi",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 5,
+    "description": "Mount EFI partition",
+    "command": "mount /dev/sda1 /mnt/boot/efi",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 6,
+    "description": "Init swap",
+    "command": "mkswap /dev/sda2",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 7,
+    "description": "Enable swap",
+    "command": "swapon /dev/sda2",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 8,
+    "description": "Install reflector",
+    "command": "pacman -Sy --noconfirm reflector",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 9,
+    "description": "Update mirrorlist using reflector",
+    "command": "reflector --country Germany,France,Netherlands,Switzerland --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 10,
+    "description": "Install base system",
+    "command": "pacstrap /mnt base linux linux-firmware base-devel grub efibootmgr networkmanager neovim git --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 11,
+    "description": "Generate fstab",
+    "command": "genfstab -U /mnt >> /mnt/etc/fstab",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 12,
+    "description": "Enter chroot",
+    "command": "MANUALLY. NOT AUTOMATED! RUN 'arch-chroot /mnt' then run phase2.json",
+    "status": "pending",
+    "error": ""
+  }
+  ]

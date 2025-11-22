@@ -1,0 +1,16 @@
+[
+    {
+    "id": 1,
+    "description": "Unmount all",
+    "command": "umount -a",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 2,
+    "description": "Reboot",
+    "command": "reboot",
+    "status": "pending",
+    "error": ""
+  }
+]

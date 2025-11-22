@@ -1,0 +1,79 @@
+[
+  {
+    "id": 1,
+    "description": "System upgrade",
+    "command": "sudo pacman -Syu --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 2,
+    "description": "Install UFW",
+    "command": "sudo pacman -S ufw --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 3,
+    "description": "Enable UFW",
+    "command": "sudo systemctl enable --now ufw",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 4,
+    "description": "Configure UFW rules",
+    "command": "sudo ufw limit 22/tcp && sudo ufw allow 80/tcp && sudo ufw allow 443/tcp && sudo ufw default deny incoming && sudo ufw default allow outgoing && sudo ufw enable",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 5,
+    "description": "Install desktop-related packages",
+    "command": "sudo pacman -S pipewire pipewire-pulse wireplumber pipewire-alsa pipewire-audio pipewire-jack qjackctl nvidia nvidia-utils nvidia-settings bluez blueman openssh --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 6,
+    "description": "Enable Bluetooth",
+    "command": "sudo systemctl enable --now bluetooth",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 7,
+    "description": "Install user environment packages",
+    "command": "sudo pacman -S alacritty fuzzel swaybg swaylock firefox ttf-jetbrains-mono-nerd xwayland-satellite 7zip tree yadm dolphin emacs pycharm-community-edition intellij-idea-community-edition --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 8,
+    "description": "Install yay (AUR helper)",
+    "command": "git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 9,
+    "description": "Install AUR packages using yay",
+    "command": "yay -S niri noctalia-shell amneziavpn-bin yandex-browser anki --noconfirm --needed --nodiffmenu --noeditmenu --answerclean All",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 10,
+    "description": "Install Docker",
+    "command": "sudo pacman -S docker docker-compose lazydocker --noconfirm",
+    "status": "pending",
+    "error": ""
+  },
+  {
+    "id": 11,
+    "description": "Enable Docker",
+    "command": "sudo systemctl enable --now docker.service",
+    "status": "pending",
+    "error": ""
+  }
+]
