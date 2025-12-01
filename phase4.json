@@ -58,7 +58,7 @@
   {
     "id": 9,
     "description": "Install AUR packages using yay",
-    "command": "yay -S niri noctalia-shell amneziavpn-bin yandex-browser anki --noconfirm --needed --nodiffmenu --noeditmenu --answerclean All",
+    "command": "yay -S niri noctalia-shell amneziavpn-bin yandex-browser anki --noconfirm --needed --answerclean All",
     "status": "pending",
     "error": ""
   },
