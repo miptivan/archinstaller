@@ -44,7 +44,7 @@
   {
     "id": 7,
     "description": "Install user environment packages",
-    "command": "sudo pacman -S alacritty fuzzel swaybg swaylock firefox ttf-jetbrains-mono-nerd xwayland-satellite 7zip tree yadm dolphin emacs pycharm-community-edition intellij-idea-community-edition --noconfirm",
+    "command": "sudo pacman -S rustup alacritty fuzzel swaybg swaylock firefox ttf-jetbrains-mono-nerd xwayland-satellite 7zip tree yadm dolphin emacs pycharm-community-edition intellij-idea-community-edition --noconfirm",
     "status": "pending",
     "error": ""
   },
