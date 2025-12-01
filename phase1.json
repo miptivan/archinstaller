@@ -65,7 +65,7 @@
   {
     "id": 10,
     "description": "Install base system",
-    "command": "pacstrap /mnt base linux linux-firmware base-devel grub efibootmgr networkmanager neovim git --noconfirm",
+    "command": "pacstrap /mnt base linux linux-firmware base-devel python grub efibootmgr networkmanager neovim git --noconfirm",
     "status": "pending",
     "error": ""
   },
