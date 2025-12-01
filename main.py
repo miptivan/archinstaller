@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 import json
-import subprocess
 import os
 import sys
-
-STEPS_FILE = "phase1.json"
 
 GREEN = "\033[32m"
 BLUE = "\033[34m"
@@ -14,30 +11,51 @@ BOLD = "\033[1m"
 RESET = "\033[0m"
 
 
-def load_steps():
-    with open(STEPS_FILE, "r") as f:
+# Пока не работает
+def play_beep():
+    try:
+        result = os.system("which beep")
+        print(result)
+
+        if result == 0:
+            os.system("beep -f 1000 -l 200")
+        else:
+            print(f"{YELLOW}Installing beep...{RESET}")
+            os.system("pacman -S beep --noconfirm")
+            os.system("beep -f 1000 -l 200")
+    except:
+        print('\a', end='', flush=True)
+
+
+def load_steps(filename):
+    with open(filename, "r") as f:
         return json.load(f)
 
 
-def save_steps(steps):
-    with open(STEPS_FILE, "w") as f:
+def save_steps(filename, steps):
+    with open(filename, "w") as f:
         json.dump(steps, f, indent=2, ensure_ascii=False)
 
 
-def run_command(cmd):
-    try:
-        proc = subprocess.run(
-            cmd,
-            shell=True,
-            check=True,
-            text=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        output = proc.stdout + proc.stderr
-        return True, output, ""
-    except subprocess.CalledProcessError as e:
-        return False, e.stdout, e.stderr
+def run_command(cmd, use_beep=False):
+    print(f"\n{BLUE}>>> {cmd}{RESET}")
+    print("-" * 60)
+
+    return_code = os.system(cmd)
+
+    print("-" * 60)
+
+    if use_beep:
+        play_beep()
+
+    success = (return_code == 0)
+
+    if success:
+        print(f"{GREEN}SUCCESS: {RESET} {cmd}")
+    else:
+        print(f"{RED}ERROR {return_code}: {RESET} {cmd}")
+
+    return success
 
 
 def print_step(step, is_current=False):
@@ -106,7 +124,7 @@ def main():
         print(f"Error: file '{stage_file}' not found!")
         return
 
-    steps = load_steps()
+    steps = load_steps(stage_file)
     step_id = 1
 
     while True:
@@ -118,38 +136,32 @@ def main():
         action = menu()
 
         if action == "q":
-            save_steps(steps)
+            save_steps(stage_file, steps)
             break
         elif action == "h":
             help()
         elif action == "r" or action == "":  # run
             print(f"RUNNING: {step["command"]}")
-            ok, out, err = run_command(step["command"])
+            ok = run_command(step["command"])
             if ok:
                 step["status"] = "done"
                 step_id = new_index(step)
             else:
                 step["status"] = "error"
-                step["error"] = out
-            save_steps(steps)
 
-            print("\n--- COMMAND OUTPUT ---")
-            output_log = ""
-            if out: output_log += out
-            if err: output_log +=RED + err + RESET
-            print(output_log)
+            save_steps(stage_file, steps)
             input("\nPress ENTER to continue...")
         elif action == "e":  # edit
             new_cmd = input("New command ('n' for cancel: ").strip()
             if new_cmd == 'n':
                 continue
             step["command"] = new_cmd
-            save_steps(steps)
+            save_steps(stage_file, steps)
         elif action == "n":  # next
             step_id = new_index(step)
         elif action == "s":  # skip
             step["status"] = "skipped"
-            save_steps(steps)
+            save_steps(stage_file, steps)
             step_id = new_index(step)
         elif action == "j":  # jump
             try:
